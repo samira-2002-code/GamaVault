@@ -57,3 +57,11 @@ function saveAndRender() {
     localStorage.setItem('gamevault_cart', JSON.stringify(cart));
     renderCart();
 }
+checkoutBtn.addEventListener('click', () => {
+    if (cart.length === 0) return alert("votre panier est vide");
+    
+    alert(" Commande réussie ");
+    cart = [];
+    saveAndRender();
+    window.location.href = 'index.html'; 
+});
