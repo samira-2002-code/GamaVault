@@ -9,4 +9,10 @@ function renderCart() {
         cartItemsContainer.innerHTML = '<p class="text-center text-gray-400 py-10">Votre panier est vide.</p>';
         cartTotalElement.innerText = '0.00';
         return;
+        
     }
+ cartItemsContainer.innerHTML = '';
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        total += item.price * item.quantity;
