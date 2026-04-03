@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Panier - GameVault</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-b from-blue-500 to-purple-600 min-h-screen text-white font-sans p-6">
+
+    <div class="max-w-4xl ml-2 mb-6">
+        <a href="index.html" class="flex items-center gap-2 mb-8 hover:text-blue-800 transition">
+           <img class="w-8 h-8 ml-2     "   src="gauche.png" alt="arrow-left">
+            <span>Retour au catalogue</span>
+        </a>
+
+        <h1 class="text-3xl font-bold mb-6">Mon Panier</h1>
+<div class="min-h-screen flex justify-center lg:items-center">
+
+    <div class="w-full max-w-4xl px-4">
+        
+        <div class="bg-gray-900 bg-opacity-50 rounded-2xl p-6 shadow-xl">
+            
+            <div id="cart-items" class="space-y-6">
+                <p class="text-center text-gray-400">Votre panier est vide.</p>
+            </div>
+
+            <hr class="my-6 border-gray-700">
+
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div class="text-2xl font-bold">
+                    Total : <span id="cart-total" class="text-green-500">0.00</span> $
+                </div>
+
+                <button id="checkout-btn" 
+                    class="bg-green-500 hover:bg-green-600 text-white px-10 py-3 rounded-xl font-bold text-lg transition w-full sm:w-auto">
+                    Commander
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+    </div>
+
+    <script type="module" src="cart.js"></script>
+</body>
+</html>
