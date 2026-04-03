@@ -53,3 +53,7 @@ window.removeItem = (index) => {
     cart.splice(index, 1);
     saveAndRender();
 };
+function saveAndRender() {
+    localStorage.setItem('gamevault_cart', JSON.stringify(cart));
+    renderCart();
+}
