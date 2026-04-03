@@ -42,3 +42,5 @@ function renderCart() {
         `;
         cartItemsContainer.innerHTML += itemHtml;
     });
+        cartTotalElement.innerText = total.toFixed(2);
+}
