@@ -59,34 +59,3 @@ categoryButtons.forEach(btn => {
 });
 
 let cart = JSON.parse(localStorage.getItem('gamevault_cart')) || [];
-
-
-window.addToCart = (id) => {
-    const gameToAdd = games.find(g => g.id === id);
-    
-  
-    const existingGame = cart.find(item => item.id === id);
-    
-    if (existingGame) {
-        existingGame.quantity += 1;
-    } else {
-        cart.push({ ...gameToAdd, quantity: 1 });
-    }
-    
-  
-    saveCart();
-    updateCartCount();
-    alert(`${gameToAdd.title} t-zad l-panier!`);
-};
-
-function saveCart() {
-    localStorage.setItem('gamevault_cart', JSON.stringify(cart));
-}
-
-function updateCartCount() {
-    const count = cart.reduce((total, item) => total + item.quantity, 0);
-    document.getElementById('cart-count').innerText = count;
-}
-
-
-updateCartCount();
