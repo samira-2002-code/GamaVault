@@ -44,3 +44,8 @@ function renderCart() {
     });
         cartTotalElement.innerText = total.toFixed(2);
 }
+window.changeQty = (index, delta) => {
+    cart[index].quantity += delta;
+    if (cart[index].quantity < 1) cart[index].quantity = 1; // Minimum 1
+    saveAndRender();
+};
