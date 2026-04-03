@@ -49,3 +49,7 @@ window.changeQty = (index, delta) => {
     if (cart[index].quantity < 1) cart[index].quantity = 1; // Minimum 1
     saveAndRender();
 };
+window.removeItem = (index) => {
+    cart.splice(index, 1);
+    saveAndRender();
+};
