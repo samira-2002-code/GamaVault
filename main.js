@@ -83,3 +83,10 @@ function saveCart() {
     localStorage.setItem('gamevault_cart', JSON.stringify(cart));
 }
 
+function updateCartCount() {
+    const count = cart.reduce((total, item) => total + item.quantity, 0);
+    document.getElementById('cart-count').innerText = count;
+}
+
+
+updateCartCount();
