@@ -20,7 +20,7 @@ function afficherPanier() {
         total += item.price * item.quantity;
 
         container.innerHTML += `
-        <div class="flex flex-col md:flex-row items-center justify-between bg-gray-800 p-4 rounded-xl gap-4 mb-10">
+        <div class="flex flex-col md:flex-row items-center justify-between bg-gray-800 p-4 rounded-xl gap-4 mb-10 ">
             
             <div class="flex items-center gap-4 w-full">
                 <img src="${item.image}" class="w-20 h-20 object-cover rounded-lg">

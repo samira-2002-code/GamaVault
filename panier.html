@@ -7,9 +7,9 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-purple-400  min-h-screen text-white font-sans p-6 ">
+<body class="bg-purple-400  min-h-screen text-white font-sans ">
 
-    <div class="max-w-4xl ml-2 mb-6">
+    <div class="max-w-4xl  mb-6">
         <a href="index.html" class="flex items-center gap-2 mb-8 transition">
            <img class="w-8 h-8 ml-2     "   src="/Image/gauche.png" alt="arrow-left">
             <span >Retour au catalogue</span>
@@ -18,31 +18,34 @@
         <h1 class="text-3xl font-bold mb-4 ml-2">Mon Panier</h1>
     <div        class="min-h-screen flex justify-center lg:items-center">
 
-    <div class="w-full max-w-4xl px-4">
-        
-        <div class="bg-gray-900 bg-opacity-50 rounded-2xl p-6 shadow-xl ml-10">
+
+</div>
+ <div class="min-h-[60vh] flex lg:items-center lg:justify-center">
             
-            <div id="cart-items" class="space-y-6">
-                <p class="text-center text-gray-400">Votre panier est vide.</p>
-            </div>
+            <div class="w-full lg:max-w-3xl">
+                
+                <div class="bg-gray-900 bg-opacity-50 rounded-2xl p-6 shadow-xl">
+                    
+                    <div id="cart-items" class="space-y-6">
+                        <p class="text-center text-gray-400">Votre panier est vide.</p>
+                    </div>
 
+                    <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-6">
+                        <div class="text-2xl font-bold">
+                            Total : <span id="cart-total" class="text-green-500">0.00</span> $
+                        </div>
 
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                <div class="text-2xl font-bold">
-                    Total : <span id="cart-total" class="text-green-500">0.00</span> $
+                        <button id="checkout-btn" 
+                            class="bg-green-500 text-white px-10 py-3 rounded-xl font-bold text-lg w-full sm:w-auto">
+                            Commander
+                        </button>
+                    </div>
+
                 </div>
 
-                <button id="checkout-btn" 
-                    class="bg-green-500  text-white px-10 py-3 rounded-xl font-bold text-lg transition w-full sm:w-auto">
-                    Commander
-                </button>
             </div>
 
         </div>
-
-    </div>
-
-</div>
     </div>
      <script src="panier.js"></script>
 </body>
