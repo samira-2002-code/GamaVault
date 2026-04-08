@@ -35,7 +35,7 @@ function renderCart() {
                     </div>
                     
                     <button onclick="removeItem(${index})" class="text-red-500 text-xl">
-                        <img class="w-8 h-8 ml-10" src="trash.png" alt="trash"/>
+                        <img class="w-8 h-8 ml-10" src="/Image/trash.png" alt="trash"/>
                     </button>
                 </div>
             </div>
