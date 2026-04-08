@@ -1,32 +1,27 @@
 import { games } from './data.js';
-
-// 1. Setup dial l-elements
 const gamesContainer = document.getElementById('games-container');
 const searchInput = document.getElementById('search-input');
 const categoryButtons = document.querySelectorAll('.category-btn');
 
-// 2. Setup dial l-Panier (Cart)
-let cart = JSON.parse(localStorage.getItem('gamevault_cart')) || [];
+let panier = JSON.parse(localStorage.getItem('gamevault_panier')) || [];
 
-// Fonction wa7da l-kolchi (Sync & UI)
 function refreshCartUI() {
     localStorage.setItem('gamevault_cart', JSON.stringify(cart));
-    const count = cart.reduce((total, item) => total + item.quantity, 0);
-    document.getElementById('cart-count').innerText = count;
+    const count = panier.reduce((total, item) => total + item.quantity, 0);
+    document.getElementById('panier-count').innerText = count;
 }
 
-// Global function bach t-zad l-panier
 function addToCart(id) {
     const game = games.find(g => g.id === id);
     const existing = cart.find(item => item.id === id);
 
-    existing ? existing.quantity++ : cart.push({ ...game, quantity: 1 });
+    existing ? existing.quantity++ : panier.push({ ...game, quantity: 1 });
 
     refreshCartUI();
     alert(`${game.title} t-zad!`);
 };
 
-// 3. Affichage o Filtering
+
 function createGameHTML(game) {
     return `
         <div class="bg-white rounded-xl overflow-hidden shadow-lg transition-transform hover:scale-105 p-4">
@@ -59,7 +54,7 @@ function updateGallery() {
     gamesContainer.innerHTML = filtered.map(createGameHTML).join('');
 }
 
-// 4. Listeners & Initialization
+
 searchInput.addEventListener('input', updateGallery);
 
 gamesContainer.addEventListener('click' , (e) => {
@@ -72,7 +67,7 @@ gamesContainer.addEventListener('click' , (e) => {
 
 categoryButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-        // UI: Toggle active class
+      
         categoryButtons.forEach(b => {
             b.classList.remove('bg-blue-600');
             b.classList.add('bg-purple-400', 'bg-opacity-50');
@@ -84,6 +79,6 @@ categoryButtons.forEach(btn => {
     });
 });
 
-// Start
+
 updateGallery();
 refreshCartUI();

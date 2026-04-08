@@ -4,7 +4,6 @@ const container = document.getElementById('cart-items');
 const totalElement = document.getElementById('cart-total');
 const btnCommander = document.getElementById('checkout-btn');
 
-// afficher panier
 function afficherPanier() {
     if (panier.length === 0) {
         container.innerHTML = '<p class="text-center text-gray-400 py-10">Votre panier est vide.</p>';
@@ -51,7 +50,7 @@ function afficherPanier() {
     totalElement.innerText = total.toFixed(2);
 }
 
-// changer quantité
+
 function changer(index, valeur) {
     panier[index].quantity += valeur;
 
@@ -62,19 +61,19 @@ function changer(index, valeur) {
     save();
 }
 
-// supprimer produit
+
 function supprimer(index) {
     panier.splice(index, 1);
     save();
 }
 
-// sauvegarder
+
 function save() {
     localStorage.setItem('gamevault_cart', JSON.stringify(panier));
     afficherPanier();
 }
 
-// commander
+
 btnCommander.addEventListener('click', function () {
     if (panier.length === 0) {
         alert("Votre panier est vide");
@@ -86,9 +85,9 @@ btnCommander.addEventListener('click', function () {
     save();
 });
 
-// rendre fonctions accessibles HTML
+
 window.changer = changer;
 window.supprimer = supprimer;
 
-// start
+
 afficherPanier();    
