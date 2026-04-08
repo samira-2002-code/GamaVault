@@ -69,13 +69,6 @@ function updateGallery() {
 
 searchInput.addEventListener('input', updateGallery);
 
-gamesContainer.addEventListener('click', (e) => {
-    const btn = e.target.closest('.add-to-cart');
-    if (btn) {
-        const id = parseInt(btn.dataset.id);
-        addToCart(id);
-    }
-})
 
 categoryButtons.forEach(btn => {
     btn.addEventListener('click', () => {
