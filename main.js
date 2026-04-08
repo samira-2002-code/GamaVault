@@ -2,23 +2,29 @@ import { games } from './data.js';
 const gamesContainer = document.getElementById('games-container');
 const searchInput = document.getElementById('search-input');
 const categoryButtons = document.querySelectorAll('.category-btn');
+let cards = [];
 
-let panier = JSON.parse(localStorage.getItem('gamevault_panier')) || [];
+let panier = JSON.parse(localStorage.getItem('gamevault_cart')) || [];
 
 function refreshCartUI() {
-    localStorage.setItem('gamevault_cart', JSON.stringify(cart));
+    localStorage.setItem('gamevault_cart', JSON.stringify(cards));
     const count = panier.reduce((total, item) => total + item.quantity, 0);
     document.getElementById('panier-count').innerText = count;
 }
 
 function addToCart(id) {
     const game = games.find(g => g.id === id);
-    const existing = cart.find(item => item.id === id);
 
-    existing ? existing.quantity++ : panier.push({ ...game, quantity: 1 });
+    const existing = cards.find(item => item.id === id);
+
+    if (existing) {
+        existing.quantity++
+    } else {
+        panier.push({ ...game, quantity: 1 })
+    }
 
     refreshCartUI();
-    alert(`${game.title} t-zad!`);
+    alert(`${game.title} commende add succsesfuly`);
 };
 
 
@@ -43,7 +49,13 @@ function createGameHTML(game) {
 function updateGallery() {
     const text = searchInput.value.toLowerCase();
     const activeBtn = document.querySelector('.category-btn.bg-blue-600');
-    const selectedCat = activeBtn ? activeBtn.getAttribute('data-category') : 'Tous';
+    let selectedCat;
+
+    if (activeBtn) {
+        selectedCat = activeBtn.getAttribute('data-category');
+    } else {
+        selectedCat = 'Tous';
+    }
 
     const filtered = games.filter(g => {
         const matchesTitle = g.title.toLowerCase().includes(text);
@@ -57,9 +69,9 @@ function updateGallery() {
 
 searchInput.addEventListener('input', updateGallery);
 
-gamesContainer.addEventListener('click' , (e) => {
+gamesContainer.addEventListener('click', (e) => {
     const btn = e.target.closest('.add-to-cart');
-    if(btn) {
+    if (btn) {
         const id = parseInt(btn.dataset.id);
         addToCart(id);
     }
@@ -67,7 +79,7 @@ gamesContainer.addEventListener('click' , (e) => {
 
 categoryButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      
+
         categoryButtons.forEach(b => {
             b.classList.remove('bg-blue-600');
             b.classList.add('bg-purple-400', 'bg-opacity-50');
