@@ -1,47 +1,55 @@
 import { games } from './data.js';
+
 const gamesContainer = document.getElementById('games-container');
 const searchInput = document.getElementById('search-input');
 const categoryButtons = document.querySelectorAll('.category-btn');
-let cards = [];
 
+ 
 let panier = JSON.parse(localStorage.getItem('gamevault_cart')) || [];
 
+ 
 function refreshCartUI() {
-    localStorage.setItem('gamevault_cart', JSON.stringify(cards));
+    localStorage.setItem('gamevault_cart', JSON.stringify(panier));
+
     const count = panier.reduce((total, item) => total + item.quantity, 0);
     document.getElementById('panier-count').innerText = count;
 }
 
 function addToCart(id) {
-   
-     
+
+
     let game = null;
 
-    for(let i = 0; i < games.length; i++){
-        if(games[i].id === id){
+    for (let i = 0; i < games.length; i++) {
+        if (games[i].id === id) {
             game = games[i];
-            break
+            break;
         }
     }
 
-   let existing = undefined;
+    if (!game) return;
 
-for (let i = 0; i < cards.length; i++) {
-    if (cards[i].id === id) {
-        existing = cards[i];
-        break; // on arrête dès qu'on trouve
+
+    let existing = null;
+
+    for (let i = 0; i < panier.length; i++) {
+        if (panier[i].id === id) {
+            existing = panier[i];
+            break;
+        }
     }
-}
+
 
     if (existing) {
-        existing.quantity++
+        existing.quantity++;
     } else {
-        panier.push({ ...game, quantity: 1 })
+        panier.push({ ...game, quantity: 1 });
     }
 
+
     refreshCartUI();
-    alert(`${game.title} commende add succsesfuly`);
-};
+    alert(`${game.title} ajouté avec succès`);
+}
 
 
 function createGameHTML(game) {
@@ -62,9 +70,11 @@ function createGameHTML(game) {
     `;
 }
 
+
 function updateGallery() {
     const text = searchInput.value.toLowerCase();
     const activeBtn = document.querySelector('.category-btn.bg-blue-600');
+
     let selectedCat;
 
     if (activeBtn) {
@@ -73,16 +83,25 @@ function updateGallery() {
         selectedCat = 'Tous';
     }
 
-    const filtered = games.filter(g => {
+
+    let filtered = [];
+
+    for (let i = 0; i < games.length; i++) {
+
+        const g = games[i];
+
         const matchesTitle = g.title.toLowerCase().includes(text);
         const matchesCat = selectedCat === 'Tous' || g.category === selectedCat;
-        return matchesTitle && matchesCat;
-    });
+
+        if (matchesTitle && matchesCat) {
+            filtered.push(g);
+        }
+    }
 
     gamesContainer.innerHTML = filtered.map(createGameHTML).join('');
 }
 
-
+// 🎧 Events
 searchInput.addEventListener('input', updateGallery);
 
 gamesContainer.addEventListener('click', (e) => {
@@ -91,15 +110,16 @@ gamesContainer.addEventListener('click', (e) => {
         const id = parseInt(btn.dataset.id);
         addToCart(id);
     }
-})
+});
 
 categoryButtons.forEach(btn => {
     btn.addEventListener('click', () => {
 
-        categoryButtons.forEach(b => {
-            b.classList.remove('bg-blue-600');
-            b.classList.add('bg-purple-400', 'bg-opacity-50');
-        });
+        for (let j = 0; j < categoryButtons.length; j++) {
+            categoryButtons[j].classList.remove('bg-blue-600');
+            categoryButtons[j].classList.add('bg-purple-400', 'bg-opacity-50');
+        }
+
         btn.classList.replace('bg-purple-400', 'bg-blue-600');
         btn.classList.remove('bg-opacity-50');
 
