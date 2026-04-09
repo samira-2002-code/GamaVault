@@ -13,9 +13,25 @@ function refreshCartUI() {
 }
 
 function addToCart(id) {
-    const game = games.find(g => g.id === id);
+   
+     
+    let game = null;
 
-    const existing = cards.find(item => item.id === id);
+    for(let i = 0; i < games.length; i++){
+        if(games[i].id === id){
+            game = games[i];
+            break
+        }
+    }
+
+   let existing = undefined;
+
+for (let i = 0; i < cards.length; i++) {
+    if (cards[i].id === id) {
+        existing = cards[i];
+        break; // on arrête dès qu'on trouve
+    }
+}
 
     if (existing) {
         existing.quantity++
@@ -69,6 +85,13 @@ function updateGallery() {
 
 searchInput.addEventListener('input', updateGallery);
 
+gamesContainer.addEventListener('click', (e) => {
+    const btn = e.target.closest('.add-to-cart');
+    if (btn) {
+        const id = parseInt(btn.dataset.id);
+        addToCart(id);
+    }
+})
 
 categoryButtons.forEach(btn => {
     btn.addEventListener('click', () => {
