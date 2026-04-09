@@ -50,27 +50,38 @@ function afficherPanier() {
     for (let i = 0; i < panier.length; i++) {
         total += panier[i].price * panier[i].quantity;
     }
-    
+
     totalElement.innerText = total.toFixed(2);
 }
 
-// 4. Actions
-window.changer = (index, delta) => {
-    panier[index].quantity = Math.max(1, panier[index].quantity + delta);
-    save();
-};
 
-window.supprimer = (index) => {
+function changer(index, delta) {
+   
+    if (panier[index].quantity + delta < 1) {
+        panier[index].quantity = 1;
+    } else {
+        panier[index].quantity += delta;
+    }
+
+    save();  
+}
+
+ 
+window.changer = changer;
+
+function supprimer(index) {
+    
     panier.splice(index, 1);
-    save();
-};
+    save(); 
+}
+
+window.supprimer = supprimer;
 
 function save() {
     localStorage.setItem('gamevault_cart', JSON.stringify(panier));
     afficherPanier();
 }
 
-// 5. Checkout
 btnCommander.addEventListener('click', () => {
     if (panier.length === 0) return alert("Votre panier est vide");
 
@@ -79,5 +90,5 @@ btnCommander.addEventListener('click', () => {
     save();
 });
 
-// Start
+ 
 afficherPanier();
