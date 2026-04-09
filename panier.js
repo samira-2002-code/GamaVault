@@ -6,7 +6,7 @@ const container = document.getElementById('cart-items');
 const totalElement = document.getElementById('cart-total');
 const btnCommander = document.getElementById('checkout-btn');
 
-// 3. Render function
+
 function afficherPanier() {
     if (panier.length === 0) {
         container.innerHTML = '<p class="text-center text-gray-400 py-10">Votre panier est vide.</p>';
@@ -14,8 +14,12 @@ function afficherPanier() {
         return;
     }
 
-    // Generate HTML for all items and join them into one string
-    container.innerHTML = panier.map((item, i) => `
+    let boxCard = '';
+
+    for (let i = 0; i < panier.length; i++) {
+        const item = panier[i];
+
+        boxCard += `
         <div class="flex flex-col md:flex-row items-center justify-between bg-gray-800 p-4 rounded-xl gap-4 mb-4">
             <div class="flex items-center gap-4 w-full">
                 <img src="${item.image}" class="w-20 h-20 object-cover rounded-lg">
@@ -35,10 +39,18 @@ function afficherPanier() {
                 </button>
             </div>
         </div>
-    `).join('');
+    `;
+    }
 
-    // Calculate total using reduce
-    const total = panier.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+    container.innerHTML = boxCard;
+
+     
+    let total = 0;
+
+    for (let i = 0; i < panier.length; i++) {
+        total += panier[i].price * panier[i].quantity;
+    }
+    
     totalElement.innerText = total.toFixed(2);
 }
 
@@ -61,7 +73,7 @@ function save() {
 // 5. Checkout
 btnCommander.addEventListener('click', () => {
     if (panier.length === 0) return alert("Votre panier est vide");
-    
+
     alert("Commande réussie !");
     panier = [];
     save();

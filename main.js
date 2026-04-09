@@ -101,7 +101,7 @@ function updateGallery() {
     gamesContainer.innerHTML = filtered.map(createGameHTML).join('');
 }
 
-// 🎧 Events
+ 
 searchInput.addEventListener('input', updateGallery);
 
 gamesContainer.addEventListener('click', (e) => {
