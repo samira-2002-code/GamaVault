@@ -1,3 +1,4 @@
+import { games } from "./data";
 
 let panier = JSON.parse(localStorage.getItem('gamevault_cart')) || [];
 
@@ -52,6 +53,16 @@ function afficherPanier() {
 
     totalElement.innerText = total.toFixed(2);
 }
+const total=getTotalQuantity(games);
+document.getElementById('games-count').textContent=total+"game"
+
+function getTotalQuantity(games) {
+    
+  return games.length ;
+}
+    
+    
+
 
 
 function changer(index, delta) {

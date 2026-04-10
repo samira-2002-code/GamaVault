@@ -48,7 +48,7 @@ function addToCart(id) {
 
 
     refreshCartUI();
-    alert(`${game.title} ajouté avec succès`);
+    // alert(`${game.title} ajouté avec succès`);
 }
 
 
