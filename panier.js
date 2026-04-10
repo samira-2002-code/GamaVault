@@ -1,7 +1,6 @@
-// 1. Initial Data
+
 let panier = JSON.parse(localStorage.getItem('gamevault_cart')) || [];
 
-// 2. DOM Elements
 const container = document.getElementById('cart-items');
 const totalElement = document.getElementById('cart-total');
 const btnCommander = document.getElementById('checkout-btn');
@@ -32,7 +31,7 @@ function afficherPanier() {
                 <div class="flex items-center bg-gray-700 rounded-lg overflow-hidden">
                     <button onclick="changer(${i}, -1)" class="px-4 py-2 hover:bg-gray-600">-</button>
                     <span class="px-4 font-bold text-blue-400">${item.quantity}</span>
-                    <button onclick="changer(${i}, 1)" class="px-4 py-2 hover:bg-gray-600">+</button>
+                    <button onclick="changer(${i}, 1)" class="px-8 py-2 hover:bg-gray-600">+</button>
                 </div>
                 <button onclick="supprimer(${i})" class="p-2 hover:bg-red-900/20 rounded-lg">
                     <img class="w-6 h-6" src="./Image/trash.png" alt="Supprimer">
@@ -70,7 +69,7 @@ function changer(index, delta) {
 window.changer = changer;
 
 function supprimer(index) {
-    
+
     panier.splice(index, 1);
     save(); 
 }
